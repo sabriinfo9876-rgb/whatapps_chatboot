@@ -1,0 +1,1276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta name="description" content="WhatsApp chatbot automation portfolio project featuring a chatbot preview, messaging workflow, and video demonstration.">
+  <title>WhatsApp Chatbot Automation | Portfolio</title>
+
+  <style>
+    :root {
+      --paper: #f7f7f2;
+      --white: #fff;
+      --ink: #20231f;
+      --muted: #6d716a;
+      --line: #e5e6de;
+      --green: #216b49;
+      --green-light: #e5f0e8;
+      --dark: #1c2922;
+      --width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(var(--width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    /* Navigation */
+
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand span {
+      color: var(--green);
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .back-link:hover {
+      color: var(--green);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 82px 0 70px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 21px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(42px, 5.5vw, 67px);
+      line-height: 1.06;
+      letter-spacing: -3px;
+      font-weight: 750;
+    }
+
+    h1 em {
+      color: var(--green);
+      font-style: normal;
+    }
+
+    .hero-copy {
+      max-width: 510px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 27px;
+    }
+
+    .button {
+      min-height: 45px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 17px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary {
+      color: white;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .primary:hover {
+      background: #18563a;
+    }
+
+    .secondary:hover {
+      border-color: var(--green);
+    }
+
+    .hero-note {
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Chatbot preview */
+
+    .chat-wrap {
+      max-width: 420px;
+      width: 100%;
+      margin-inline: auto;
+    }
+
+    .chat-caption {
+      margin-bottom: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .sample-label {
+      padding: 4px 8px;
+      background: var(--green-light);
+      color: var(--green);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .chat-window {
+      overflow: hidden;
+      border: 1px solid #d8ddd6;
+      border-radius: 12px;
+      background: #efe9df;
+      box-shadow: 0 16px 40px rgba(31,45,34,.07);
+    }
+
+    .chat-header {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: #fff;
+      border-bottom: 1px solid #e7e7e1;
+    }
+
+    .avatar {
+      width: 39px;
+      height: 39px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-light);
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .chat-person {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-person strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .chat-person small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .chat-status {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .chat-body {
+      min-height: 315px;
+      padding: 18px 13px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 11px;
+      background-color: #f0ebe2;
+      background-image: radial-gradient(#d9d2c7 .7px, transparent .7px);
+      background-size: 15px 15px;
+    }
+
+    .chat-date {
+      align-self: center;
+      padding: 4px 9px;
+      border-radius: 5px;
+      background: rgba(255,255,255,.8);
+      color: #77766f;
+      font-size: 10px;
+    }
+
+    .message {
+      max-width: 88%;
+      padding: 10px 12px 7px;
+      border-radius: 9px;
+      background: white;
+      font-size: 12px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .message.bot {
+      border-top-left-radius: 3px;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: #dcefd4;
+      border-top-right-radius: 3px;
+    }
+
+    .message-time {
+      display: block;
+      margin-top: 4px;
+      color: #85877f;
+      font-size: 9px;
+      text-align: right;
+    }
+
+    .chat-options {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    .chat-option {
+      padding: 9px 6px;
+      background: white;
+      color: var(--green);
+      border: 1px solid #dce2d8;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .chat-option:hover {
+      background: var(--green-light);
+    }
+
+    .chat-option:focus-visible,
+    .chat-reset:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
+    }
+
+    .chat-footer {
+      padding: 10px 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border-top: 1px solid #e4e5de;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .chat-footer span {
+      flex: 1;
+    }
+
+    .chat-reset {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: white;
+      color: var(--green);
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    /* General sections */
+
+    .section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      max-width: 690px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      margin: 12px 0;
+      font-size: clamp(29px, 4vw, 43px);
+      line-height: 1.17;
+      letter-spacing: -1.6px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Project story */
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .story {
+      padding: 25px 0;
+      border-top: 2px solid var(--line);
+    }
+
+    .story.solution {
+      border-color: var(--green);
+    }
+
+    .story-label {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .story.solution .story-label {
+      color: var(--green);
+    }
+
+    .story h3 {
+      margin-bottom: 9px;
+      font-size: 20px;
+    }
+
+    .story p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Workflow */
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      padding-top: 17px;
+      border-top: 1px solid #cfd4ca;
+    }
+
+    .step-number {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Video demonstration */
+
+    .video-section {
+      background: #f0f1e9;
+    }
+
+    .video-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    .video-heading .section-heading {
+      margin-bottom: 0;
+    }
+
+    .video-note {
+      max-width: 220px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .video-frame {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #20231f;
+      border: 1px solid #dce0d6;
+      border-radius: 10px;
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #20231f;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      text-align: center;
+      color: white;
+      background: #202b23;
+    }
+
+    .video-placeholder[hidden] {
+      display: none;
+    }
+
+    .placeholder-content {
+      max-width: 380px;
+    }
+
+    .play-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+      color: white;
+      font-size: 20px;
+    }
+
+    .placeholder-content h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+
+    .placeholder-content p {
+      margin-bottom: 20px;
+      color: #c8d0c8;
+      font-size: 13px;
+    }
+
+    .video-upload-help {
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .video-upload-help code {
+      padding: 2px 5px;
+      background: #e5e7dd;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    /* Capabilities */
+
+    .capabilities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .capability {
+      padding: 20px 15px 20px 0;
+      display: grid;
+      grid-template-columns: 25px 1fr;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .capability:nth-child(odd) {
+      margin-right: 24px;
+    }
+
+    .capability-mark {
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .capability h3 {
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .capability p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tech-list {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech {
+      padding: 7px 10px;
+      border: 1px solid #dfe2d9;
+      border-radius: 5px;
+      color: #50574f;
+      background: rgba(255,255,255,.5);
+      font-size: 11px;
+    }
+
+    /* Contact */
+
+    .closing {
+      padding: 68px 0 75px;
+    }
+
+    .closing-inner {
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      background: var(--dark);
+      color: white;
+      border-radius: 10px;
+    }
+
+    .closing-copy {
+      max-width: 620px;
+    }
+
+    .closing .eyebrow {
+      color: #a7d2b5;
+    }
+
+    .closing h2 {
+      margin: 12px 0;
+      font-size: clamp(26px, 3vw, 35px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .closing p {
+      color: #c3cec5;
+      font-size: 14px;
+    }
+
+    .closing .button {
+      flex-shrink: 0;
+      color: var(--dark);
+      background: white;
+      border-color: white;
+    }
+
+    .closing .button:hover {
+      background: #e9f0e9;
+    }
+
+    footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .footer-inner a:hover {
+      color: var(--green);
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .chat-wrap {
+        max-width: 470px;
+      }
+
+      .workflow {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      .closing-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .nav {
+        min-height: 64px;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .back-link {
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 55px 0 48px;
+      }
+
+      h1 {
+        font-size: clamp(39px, 11vw, 54px);
+        letter-spacing: -2.4px;
+      }
+
+      .hero-copy {
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .section-heading h2 {
+        letter-spacing: -1px;
+      }
+
+      .story-grid,
+      .capabilities,
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      .capability:nth-child(odd) {
+        margin-right: 0;
+      }
+
+      .video-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .video-note {
+        max-width: 100%;
+      }
+
+      .video-frame {
+        aspect-ratio: 16 / 10;
+      }
+
+      .closing {
+        padding: 45px 0;
+      }
+
+      .closing-inner {
+        padding: 27px 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">Portfolio<span>.</span></a>
+        <a class="back-link" href="index.html#projects">← Back to projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <span class="eyebrow">AI automation project</span>
+
+          <h1>
+            Better conversations.<br>
+            <em>Less manual work.</em>
+          </h1>
+
+          <p class="hero-copy">
+            A WhatsApp chatbot concept for handling everyday customer
+            enquiries, sharing useful business information, and organising
+            routine messaging workflows.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="#project">
+              Explore the project ↓
+            </a>
+
+            <a class="button secondary" href="#video-demo">
+              Watch demo ▶
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Customer messaging · AI automation · Workflow design
+          </p>
+        </div>
+
+        <!-- Interactive chatbot example -->
+        <div class="chat-wrap">
+          <div class="chat-caption">
+            <span>Example customer conversation</span>
+            <span class="sample-label">Interactive preview</span>
+          </div>
+
+          <div class="chat-window">
+            <div class="chat-header">
+              <div class="avatar">B</div>
+
+              <div class="chat-person">
+                <strong>Business Assistant</strong>
+                <small>Sample chatbot interface</small>
+              </div>
+
+              <span class="chat-status">● Preview</span>
+            </div>
+
+            <div class="chat-body" id="chatBody" aria-live="polite">
+              <div class="chat-date">SAMPLE CONVERSATION</div>
+
+              <div class="message bot">
+                Assalam-o-Alaikum! Welcome. How can I help you today?
+                <span class="message-time">10:30 AM</span>
+              </div>
+
+              <div class="message user">
+                I want to know about your products.
+                <span class="message-time">10:31 AM</span>
+              </div>
+
+              <div class="message bot" id="botReply">
+                Of course! You can ask about product details, pricing,
+                or availability. What would you like to know?
+                <span class="message-time">10:31 AM</span>
+              </div>
+
+              <div class="chat-options" id="chatOptions">
+                <button class="chat-option" data-choice="price" type="button">
+                  Product pricing
+                </button>
+
+                <button class="chat-option" data-choice="hours" type="button">
+                  Business hours
+                </button>
+
+                <button class="chat-option" data-choice="order" type="button">
+                  Order assistance
+                </button>
+
+                <button class="chat-option" data-choice="human" type="button">
+                  Talk to a person
+                </button>
+              </div>
+            </div>
+
+            <div class="chat-footer">
+              <span>Simulated preview — not connected to WhatsApp.</span>
+              <button class="chat-reset" id="resetChat" type="button">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECT OVERVIEW -->
+    <section class="section" id="project">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Project overview</span>
+          <h2>Designed around a real business need.</h2>
+          <p>
+            Repetitive messages can take time away from important work.
+            A well-planned chatbot workflow can help businesses respond
+            consistently to common enquiries while keeping human support
+            available for more complex requests.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <article class="story">
+            <div class="story-label">01 / The challenge</div>
+            <h3>Answering the same questions.</h3>
+            <p>
+              Customers often ask about prices, products, opening hours,
+              and orders. Responding manually to every routine question
+              can slow down day-to-day operations.
+            </p>
+          </article>
+
+          <article class="story solution">
+            <div class="story-label">02 / The approach</div>
+            <h3>A clearer way to handle enquiries.</h3>
+            <p>
+              Plan a messaging workflow that identifies common requests,
+              provides relevant information, and directs conversations
+              requiring personal attention to a team member.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Workflow</span>
+          <h2>From incoming message to useful response.</h2>
+          <p>
+            The four main stages of a typical messaging automation setup.
+          </p>
+        </div>
+
+        <div class="workflow">
+          <article class="step">
+            <span class="step-number">01 — Receive</span>
+            <h3>Customer message</h3>
+            <p>A customer sends an enquiry through a configured messaging channel.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">02 — Understand</span>
+            <h3>Process the request</h3>
+            <p>Configured rules or an AI model help identify what the customer needs.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">03 — Respond</span>
+            <h3>Prepare an answer</h3>
+            <p>The workflow uses available business information to prepare a relevant response.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">04 — Follow up</span>
+            <h3>Take the next step</h3>
+            <p>Where configured, the workflow can record an enquiry or route it to a person.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIDEO DEMO -->
+    <section class="section video-section" id="video-demo">
+      <div class="container">
+
+        <div class="video-heading">
+          <div class="section-heading">
+            <span class="eyebrow">Project demonstration</span>
+            <h2>See it in action.</h2>
+            <p>
+              Watch the project walkthrough to see the chatbot interface
+              and the messaging workflow.
+            </p>
+          </div>
+
+          <p class="video-note">
+            Video demonstration of the project. Live integrations should
+            be verified separately.
+          </p>
+        </div>
+
+        <div class="video-frame">
+
+          <!--
+            Put your actual video at:
+            videos/whatsapp-chatbot-demo.mp4
+
+            Then this player will display it automatically.
+          -->
+
+          <video
+            id="demoVideo"
+            controls
+            playsinline
+            preload="metadata"
+            hidden
+          >
+            <source
+              src="videos/whatsapp-chatbot-demo.mp4"
+              type="video/mp4"
+            >
+            Your browser does not support HTML video.
+          </video>
+
+          <div class="video-placeholder" id="videoPlaceholder">
+            <div class="placeholder-content">
+              <div class="play-icon">▶</div>
+
+              <h3>WhatsApp Chatbot Demo</h3>
+
+              <p>
+                Your recorded walkthrough will appear here.
+                Add your MP4 video to the portfolio folder to get started.
+              </p>
+
+              <a class="button primary" href="#video-instructions">
+                How to add video ↓
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="video-upload-help" id="video-instructions">
+          <strong>Video location:</strong>
+          <code>videos/whatsapp-chatbot-demo.mp4</code>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Potential capabilities</span>
+          <h2>Practical use cases for businesses.</h2>
+          <p>
+            These are possible applications of the workflow. Actual
+            features depend on the connected services and implementation.
+          </p>
+        </div>
+
+        <div class="capabilities">
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Frequently asked questions</h3>
+              <p>Provide consistent answers to common customer enquiries.</p>
+            </div>
+          </article>
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Product information</h3>
+              <p>Share product details and pricing from a connected catalogue.</p>
+            </div>
+          </article>
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Order enquiries</h3>
+              <p>Support order-related questions when the relevant data source is connected.</p>
+            </div>
+          </article>
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Customer records</h3>
+              <p>Send selected details to a suitably secured database or CRM.</p>
+            </div>
+          </article>
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Human handover</h3>
+              <p>Route conversations to a person when a request needs individual attention.</p>
+            </div>
+          </article>
+
+          <article class="capability">
+            <span class="capability-mark">↗</span>
+            <div>
+              <h3>Connected workflows</h3>
+              <p>Connect messaging to other business tools using configured integrations.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="tech-list">
+          <span class="tech">AI Automation</span>
+          <span class="tech">WhatsApp Integration</span>
+          <span class="tech">Workflow Design</span>
+          <span class="tech">API Integration</span>
+          <span class="tech">Customer Support</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="closing">
+      <div class="container">
+        <div class="closing-inner">
+
+          <div class="closing-copy">
+            <span class="eyebrow">Have a project in mind?</span>
+            <h2>Let's make everyday work simpler.</h2>
+            <p>
+              Need a chatbot, a customer messaging workflow, or a
+              practical automation solution? Let's discuss your requirements.
+            </p>
+          </div>
+
+          <a class="button" href="index.html#contact">
+            Get in touch ↗
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Portfolio. All rights reserved.</span>
+      <a href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    /* Interactive sample chatbot */
+
+    const chatBody = document.getElementById("chatBody");
+    const botReply = document.getElementById("botReply");
+    const chatOptions = document.getElementById("chatOptions");
+    const resetChat = document.getElementById("resetChat");
+
+    const initialBotReply =
+      "Of course! You can ask about product details, pricing, or availability. What would you like to know?";
+
+    const responses = {
+      price: {
+        user: "I'd like to know your prices.",
+        bot: "Prices depend on the product you are interested in. A connected catalogue could provide current pricing."
+      },
+      hours: {
+        user: "What are your business hours?",
+        bot: "Business hours can be shared here once the correct schedule has been added to the chatbot's business information."
+      },
+      order: {
+        user: "Can you help me with an order?",
+        bot: "I can guide you through an order enquiry. In a live setup, this step could connect to your order records or support team."
+      },
+      human: {
+        user: "I'd like to speak to a person.",
+        bot: "Of course. A real implementation could forward your request to the relevant team member when human support is available."
+      }
+    };
+
+    function addMessage(text, type) {
+      const message = document.createElement("div");
+      message.className = "message " + type;
+
+      message.appendChild(document.createTextNode(text));
+
+      const time = document.createElement("span");
+      time.className = "message-time";
+      time.textContent = "Sample conversation";
+
+      message.appendChild(time);
+      chatBody.insertBefore(message, chatOptions);
+
+      return message;
+    }
+
+    chatOptions.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-choice]");
+
+      if (!button) return;
+
+      const choice = responses[button.dataset.choice];
+
+      if (!choice) return;
+
+      chatOptions.hidden = true;
+
+      addMessage(choice.user, "user");
+
+      botReply.textContent = choice.bot;
+
+      const time = document.createElement("span");
+      time.className = "message-time";
+      time.textContent = "Sample response";
+
+      botReply.appendChild(time);
+      botReply.hidden = false;
+    });
+
+    resetChat.addEventListener("click", function () {
+      chatBody.querySelectorAll(".message.user").forEach(function (message) {
+        message.remove();
+      });
+
+      botReply.textContent = initialBotReply;
+
+      const time = document.createElement("span");
+      time.className = "message-time";
+      time.textContent = "10:31 AM";
+
+      botReply.appendChild(time);
+
+      chatOptions.hidden = false;
+    });
+
+    /* Video demo:
+       The video player is enabled only when a video file is supplied.
+       Replace the path below if your file has a different location.
+    */
+
+    const demoVideo = document.getElementById("demoVideo");
+    const videoPlaceholder = document.getElementById("videoPlaceholder");
+
+    const demoVideoUrl = "video.mp4";
+
+    demoVideo.querySelector("source").src = demoVideoUrl;
+    demoVideo.hidden = false;
+    videoPlaceholder.hidden = true;
+
+    demoVideo.addEventListener("error", function () {
+      demoVideo.hidden = true;
+      videoPlaceholder.hidden = false;
+    });
+
+    demoVideo.addEventListener("loadedmetadata", function () {
+      demoVideo.hidden = false;
+      videoPlaceholder.hidden = true;
+    });
+
+  </script>
+
+</body>
+</html>
